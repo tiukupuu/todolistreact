@@ -8,10 +8,8 @@ test('renders App component', () => {
   expect(header).toBeInTheDocument();
 });
 
-test('add and clear todos', () => {
+test('add & clear todo', () => {
   render(<App />);
-
-
   const desc = screen.getByPlaceholderText('Description');
   fireEvent.change(desc, { target: { value: 'Go to coffee' } });
   const date = screen.getByPlaceholderText('Date');
@@ -21,15 +19,10 @@ test('add and clear todos', () => {
   const addButton = screen.getByText('Add');
   fireEvent.click(addButton);
 
-
   const table = screen.getByRole('table');
-  expect(table).toHaveTextContent('Go to coffee');
-
+  expect(table).toHaveTextContent(/go to coffee/i);
 
   const clearButton = screen.getByText('Clear');
   fireEvent.click(clearButton);
-
-
-  expect(table).not.toHaveTextContent('Go to coffee');
+  expect(table).not.toHaveTextContent(/go to coffee/i);
 });
-
